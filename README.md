@@ -1,4 +1,4 @@
-# dls-github-label-maker
+# DLS GitHub Labeler
 
 This project contains a script that can delete and create labels for github
 repositories. We run the label creation command on any new DLS github
