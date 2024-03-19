@@ -4,24 +4,22 @@ This project contains a script that can delete and create labels for github
 repositories. We run the label creation command on any new DLS github
 repository. This gives us consistency between our project repositories.
 
-## Labels styleguide
+## Running this code
+### Setup
 
-Labels have a color, and a name. In this repository, labels are defined as
-belonging to some category. Labels in the same category have the same color.
-This helps us quickly recognize that type of label we're looking at even before
-we read its name. Categories, their labels, and their colors are defined and
-maintained in labels.json
-
-Labels should be lower case and use dashes, not underscores.
-
-## Setup
-
+Install external dependencies:
 ```
-$ bundle install
 $ brew install lastpass-cli
 ```
 
-## Run instructions
+Clone this repository following github's instructions provided in the `Code` dropdown on the main page of this repo.
+
+Install bundled dependencies:
+```
+$ bundle install
+```
+
+### Run
 
 To allow this tool to fetch the github token from lastpass, you have to log in
 to lastpass each time you want to use it.
@@ -47,6 +45,16 @@ To delete a label from all of the DLS repositories, do:
 ```
 $ bin/labeler delete_label pulibrary/figgy,pulibrary/dpul,pulibrary/pulmap,pulibrary/pulfalight,pulibrary/lae-blacklight [label]
 ```
+
+## Updating the labels configuration
+
+Labels have a color and a name. In this repository, labels are defined as
+belonging to some category. Labels in the same category have the same color.
+This helps us quickly recognize that type of label we're looking at even before
+we read its name. Categories, their labels, and their colors are defined and
+maintained in [labels.json](labels.json)
+
+Labels should be lower case and use dashes, not underscores.
 
 ## Reference
 * Code uses the [Octokit Client](https://octokit.github.io/octokit.rb/Octokit/Client/Labels.html)
