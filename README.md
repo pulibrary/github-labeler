@@ -11,6 +11,7 @@ Install external dependencies:
 ```
 $ brew install lastpass-cli
 ```
+Ensure you have access to Shared-ITIMS-Passwords in your lastpass account.
 
 Clone this repository following github's instructions provided in the `Code` dropdown on the main page of this repo.
 
