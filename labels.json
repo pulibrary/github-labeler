@@ -2,141 +2,90 @@
   "high priority": {
     "color-name": "red",
     "color": "ff5050",
-    "labels": ["priority: high", "priority: critical", "security", "sudden-priority"]
-  },
-  "priority: high":{
-
-  }
-
-  "blocked": {
-    "color-name": "magenta",
-    "color": "cc317c",
-    "labels": ["product-owner-review", "question", "replication-needed", "blocked"]
-  },
-  "source": {
-    "color-name": "dark yellow",
-    "color": "fbca04",
-    "labels": ["user-request", "honeybadger", "mule"]
-  },
-  "scope": {
-    "color-name": "bright aqua",
-    "color": "41d6c3",
-    "labels": ["feature", "enhancement", "bug"]
-  },
-  "size": {
-    "color-name": "royal blue",
-    "color": "5319e7",
-    "labels": ["spike", "small", "epic", "learning-friendly"]
-  },
-  "status": {
-    "color-name": "gray",
-    "color": "e9e9e9",
-    "labels": ["wontfix", "wishlist"]
-  },
-  "task": {
-    "color-name": "dusty blue",
-    "color": "bfdadc",
-    "labels": ["cleanup", "dependencies", "documentation", "refactor",
-      "accessibility", "content", "responsive", "user experience",
-      "usability-test", "visual design", "wireframe", "javascript",
-      "database", "index", "backend", "optimization", "infrastructure"]
-  },
-  "board": {
-    "color-name": "bright yellow",
-    "color": "fffe99",
-    "labels": ["work-cycle", "maintenance / research", "on deck", "operations"]
-  }
-}
-
-// new code v1 
-{
-  "high priority": {
-    "color-name": "red",
-    "color": "ff5050",
     "labels": [
-      {"name": "priority: high", "description":},
-      {"name": "priority: critical", "description": },
-      {"name": "security", "description": },
-      {"name": "sudden-priority", "description": }
+      {"name": "priority: high", "description": " "},
+      {"name": "priority: critical", "description": " "},
+      {"name": "security", "description": " "},
+      {"name": "sudden-priority", "description": " "}
     ]
   },
   "blocked": {
     "color-name": "magenta",
     "color": "cc317c",
-    "labels": [
-      {"name": "product-owner-review", "description": },
-      {"name": "question", "description": },
-      {"name": "replication-needed", "description": },
-      {"name": "blocked", "description": }
+    "labels": [""
+      {"name": "product-owner-review", "description": " "},
+      {"name": "question", "description": " "},
+      {"name": "replication-needed", "description": " "},
+      {"name": "blocked", "description": " "}
     ]
   },
   "source": {
     "color-name": "dark yellow",
     "color": "fbca04",
     "labels": [
-      {"name": "user-request", "description": },
-      {"name": "honeybadger", "description": },
-      {"name": "mule", "description": }
+      {"name": "user-request", "description": " "},
+      {"name": "honeybadger", "description": " "},
+      {"name": "mule", "description": " "}
     ]
   },
   "scope": {
     "color-name": "bright aqua",
     "color": "41d6c3",
     "labels": [
-      {"name": "feature", "description": },
-      {"name": "enhancement", "description": },
-      {"name": "bug", "description": }
+      {"name": "feature", "description": " "},
+      {"name": "enhancement", "description": " "},
+      {"name": "bug", "description": " "}
     ]
   },
   "size": {
     "color-name": "royal blue",
     "color": "5319e7",
     "labels": [
-      {"name": "spike", "description": },
-      {"name": "small", "description": },
-      {"name": "epic", "description": },
-      {"name": "learning-friendly", "description":}
+      {"name": "spike", "description": " "},
+      {"name": "small", "description": " "},
+      {"name": "epic", "description": " "},
+      {"name": "learning-friendly", "description": " "}
     ]
   },
   "status": {
     "color-name": "gray",
     "color": "e9e9e9",
     "labels": [
-      {"name": "wontfix", "description": },
-      {"name": "wishlist", "description": }
+      {"name": "wontfix", "description": " "},
+      {"name": "wishlist", "description": " "}
     ]
   },
   "task": {
     "color-name": "dusty blue",
     "color": "bfdadc",
     "labels": [
-      {"name": "cleanup", "description": },
-      {"name": "dependencies", "description": },
-      {"name": "documentation", "description": },
-      {"name": "refactor", "description": },
-      {"name": "accessibility", "description": },
-      {"name": "content", "description": },
-      {"name": "responsive", "description": },
-      {"name": "user experience", "description": },
-      {"name": "usability-test", "description": },
-      {"name": "visual design", "description": },
-      {"name": "wireframe", "description": },
-      {"name": "javascript", "description": },
-      {"name": "database", "description": },
-      {"name": "index", "description": },
-      {"name": "backend", "description": },
-      {"name": "optimization", "description": },
-      {"name": "infrastructure", "description": }
+      {"name": "cleanup", "description": " "},
+      {"name": "dependencies", "description": " "},
+      {"name": "documentation", "description": " "},
+      {"name": "refactor", "description": " "},
+      {"name": "accessibility", "description": " "},
+      {"name": "content", "description": " "},
+      {"name": "responsive", "description": " "},
+      {"name": "user experience", "description": " "},
+      {"name": "usability-test", "description": " "},
+      {"name": "visual design", "description": " "},
+      {"name": "wireframe", "description": " "},
+      {"name": "javascript", "description": " "},
+      {"name": "database", "description": " "},
+      {"name": "index", "description": " "},
+      {"name": "backend", "description": " "},
+      {"name": "optimization", "description": " "},
+      {"name": "infrastructure", "description": " "}
     ]
   },
   "board": {
     "color-name": "bright yellow",
     "color": "fffe99",
     "labels": [
-      {"name": "work-cycle", "description": },
-      {"name": "maintenance / research", "description": },
-      {"name": "on deck", "description": },
-      {"name": "operations", "description":}
+      {"name": "work-cycle", "description": " "},
+      {"name": "maintenance / research", "description": " "},
+      {"name": "on deck", "description": " "},
+      {"name": "operations", "description": " "}
     ]
   }
 }
