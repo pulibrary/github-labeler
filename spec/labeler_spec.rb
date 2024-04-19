@@ -48,8 +48,8 @@ RSpec.describe Labeler do
   describe "#apply_labels" do
     it "applies labels" do
       labels_hash = {
-        category1: { color: "ff5050", labels: ["bug", "security"] },
-        category5: { color: "44cec0", labels: ["refactor"] }
+        category1: { color: "ff5050", labels: [{ "name": "bug", "description": "" }, { "name": "security", "description": "" }] },
+        category5: { color: "44cec0", labels: [{ "name": "refactor", "description": "" }] }
       }
       allow(client).to receive(:add_label)
       labeler = described_class.new(client: client, labels_hash: labels_hash)
