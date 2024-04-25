@@ -52,21 +52,22 @@ RSpec.describe Labeler do
         category5: { color: "44cec0", labels: [{ "name": "refactor", "description": "" }] }
       }
       allow(client).to receive(:add_label)
+      allow(client).to receive(:update_label)
       labeler = described_class.new(client: client, labels_hash: labels_hash)
       repos = ["sample_repo1", "sample_repo2"]
       labeler.apply_labels(repos)
-      expect(client).to have_received(:add_label).with("sample_repo1", "bug", "ff5050")
-      expect(client).to have_received(:add_label).with("sample_repo1", "security", "ff5050")
-      expect(client).to have_received(:add_label).with("sample_repo1", "refactor", "44cec0")
-      expect(client).to have_received(:add_label).with("sample_repo2", "bug", "ff5050")
-      expect(client).to have_received(:add_label).with("sample_repo2", "security", "ff5050")
-      expect(client).to have_received(:add_label).with("sample_repo2", "refactor", "44cec0")
+      expect(client).to have_received(:add_label).with("sample_repo1", "bug", "ff5050").exactly(1).times
+      expect(client).to have_received(:add_label).with("sample_repo1", "security", "ff5050").exactly(1).times
+      expect(client).to have_received(:add_label).with("sample_repo1", "refactor", "44cec0").exactly(1).times
+      expect(client).to have_received(:add_label).with("sample_repo2", "bug", "ff5050").exactly(1).times
+      expect(client).to have_received(:add_label).with("sample_repo2", "security", "ff5050").exactly(1).times
+      expect(client).to have_received(:add_label).with("sample_repo2", "refactor", "44cec0").exactly(1).times
     end
 
     context "when the token already exists" do
       it "updates the color" do
         labels_hash = {
-          category5: { color: "44cec0", labels: ["refactor"] }
+          category5: { color: "44cec0", labels: ["name": "refactor", "description": ""] }
         }
         response_hash = {
           method: "POST",

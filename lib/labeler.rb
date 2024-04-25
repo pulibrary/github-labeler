@@ -32,10 +32,11 @@ class Labeler
     repos.each do |repo|
       labels_hash.each_value do |h|
         h[:labels].each do |label|
+          name = label[:name]
           begin
-            client.add_label(repo, label["name"], h[:color], label["description"])
+            client.add_label(repo, name, h[:color])
           rescue Octokit::UnprocessableEntity => e
-            update_label_if_exists(repo, label, h[:color], e)
+            client.update_label(repo, name, { color: h[:color] }) if already_exists_error?(e.message)
           end
         end
       end
