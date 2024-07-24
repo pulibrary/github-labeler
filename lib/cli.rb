@@ -18,6 +18,11 @@ class LabelerCLI < Thor
     puts Labeler.new.categories
   end
 
+  desc "label_repo [org/repository] ", "apply all the labels to given repo"
+  def label_repo(repo)
+    Labeler.new.label_repo(repo)
+  end
+
   desc "apply_labels [org/repository,org/repository] ", "apply all the labels to given repos"
   def apply_labels(repos)
     Labeler.new.apply_labels(repos.split(","))
