@@ -4,8 +4,7 @@ This project contains a script that can delete and create labels for github
 repositories. We run the label creation command on any new DLS github
 repository. This gives us consistency between our project repositories.
 
-## Running this code
-### Setup
+## Initial Setup
 
 Install external dependencies:
 ```
@@ -20,31 +19,34 @@ Install bundled dependencies:
 $ bundle install
 ```
 
-### Run
+### Authorization
 
-To allow this tool to fetch the github token from lastpass, you have to log in
-to lastpass each time you want to use it.
+Each time you use this tool, you must log in to lastpass. This allows the code to fetch the github token from lastpass.
 
 ```
 $ lpass login <email@email.com>
 ```
 
-Create labels in one repository: to apply all the labels from labels.json to a single DLS repository, do, e.g.:
+## Running Commands
+### Create labels in one repository
+Example: To apply all the labels from labels.json to the dpul-c repository, do:
 
 ```
 $ bin/labeler apply_labels pulibrary/dpul-collections
 ```
 
-Create labels in many repositories: to apply all the labels from labels.json to all DLS repositories, do, e.g.:
+### Create labels in many repositories
+Example: To apply all the labels from labels.json to all DLS repositories, do:
 
 ```
 $ bin/labeler apply_labels pulibrary/figgy,pulibrary/dpul,pulibrary/pulmap,pulibrary/pulfalight,pulibrary/lae-blacklight
 ```
 
-To delete a label from all of the DLS repositories, do:
+### Delete a label from many repositories
+Example: To delete the label 'silly-ideas' from all the DLS repositories, do:
 
 ```
-$ bin/labeler delete_label pulibrary/figgy,pulibrary/dpul,pulibrary/pulmap,pulibrary/pulfalight,pulibrary/lae-blacklight [label]
+$ bin/labeler delete_label pulibrary/figgy,pulibrary/dpul,pulibrary/pulmap,pulibrary/pulfalight,pulibrary/lae-blacklight silly-ideas
 ```
 
 ## Updating the labels configuration
