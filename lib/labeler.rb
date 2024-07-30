@@ -59,8 +59,11 @@ class Labeler
   # @param repos Array<String> List of repositories to delete from, aka ["pulibrary/figgy", "pulibrary/dpul"]
   # @param label String The name of the label, aka "on hold"
   # @return bool Whether it was deleted
-  def delete_label(repos, label)
-    repos.map do |repo|
+  def delete_label(config_file, label)
+    file_string = File.read(config_file)
+    config_hash = YAML.load(file_string)
+    repos_array = config_hash["repos"]
+    repos_array.map do |repo|
       client.delete_label!(repo, label)
     end
   end

@@ -30,14 +30,16 @@ class LabelerCLI < Thor
     Labeler.new.label_repos(config_file)
   end
 
-  desc "clear_labels [org/repository/]", "delete all labels from the given repo"
+  desc "clear_labels [org/repository]", "delete all labels from the given repo"
   def clear_labels(repo)
     Labeler.new.clear_labels(repo)
   end
 
-  desc "delete_label [org/repository,org/repository] label", "delete the label from the repos"
-  def delete_label(repos, label)
-    puts Labeler.new.delete_label(repos.split(","), label)
+  desc "delete_label --config=[config/dls.yml] label", "delete the label from the configured repos"
+  option :config, required: true
+  def delete_label(label)
+    config_file = options[:config]
+    puts Labeler.new.delete_label(config_file, label)
   end
 end
 
