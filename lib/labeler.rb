@@ -35,26 +35,13 @@ class Labeler
     end
   end
 
+  # @param config_file String the file name to read configuration from
   def label_repos(config_file)
     file_string = File.read(config_file)
     config_hash = YAML.load(file_string)
     repos_array = config_hash["repos"]
     repos_array.each do |repo|
       label_repo(repo)
-    end
-  end
-
-  # Apply the labels
-  # @param repos Array<String> List of repositories to apply labels to, aka ["pulibrary/figgy", "pulibrary/dpul"]
-  def apply_labels(repos)
-    repos.each do |repo|
-      labels_hash.values.each do |h|
-        h[:labels].each do |label|
-          client.add_label(repo, label, h[:color])
-        rescue Octokit::UnprocessableEntity => e
-          client.update_label(repo, label, { color: h[:color] }) if already_exists_error?(e.message)
-        end
-      end
     end
   end
 

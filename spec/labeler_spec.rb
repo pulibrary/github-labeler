@@ -103,49 +103,6 @@ RSpec.describe Labeler do
     end
   end
 
-  describe "#apply_labels" do
-    it "applies labels" do
-      labels_hash = {
-        category1: { color: "ff5050", labels: ["bug", "security"] },
-        category5: { color: "44cec0", labels: ["refactor"] }
-      }
-      allow(client).to receive(:add_label)
-      labeler = described_class.new(client: client, labels_hash: labels_hash)
-      repos = ["sample_repo1", "sample_repo2"]
-      labeler.apply_labels(repos)
-      expect(client).to have_received(:add_label).with("sample_repo1", "bug", "ff5050")
-      expect(client).to have_received(:add_label).with("sample_repo1", "security", "ff5050")
-      expect(client).to have_received(:add_label).with("sample_repo1", "refactor", "44cec0")
-      expect(client).to have_received(:add_label).with("sample_repo2", "bug", "ff5050")
-      expect(client).to have_received(:add_label).with("sample_repo2", "security", "ff5050")
-      expect(client).to have_received(:add_label).with("sample_repo2", "refactor", "44cec0")
-    end
-
-    context "when the token already exists" do
-      it "updates the color" do
-        labels_hash = {
-          category5: { color: "44cec0", labels: ["refactor"] }
-        }
-        response_hash = {
-          method: "POST",
-          url: "https://api.github.com/repos/hackartisan/dotfiles-local/labels",
-          status: 422,
-          body: "Validation Failed\nError summary:\n  resource: Label\n  code: already_exists\n  field: name // See: https://docs.github.com/rest/reference/issues#create-a-label"
-        }
-        allow(client).to receive(:add_label).and_raise(Octokit::UnprocessableEntity.new(response_hash))
-        allow(client).to receive(:update_label)
-
-        labeler = described_class.new(client: client, labels_hash: labels_hash)
-        repos = ["sample_repo1", "sample_repo2"]
-        labeler.apply_labels(repos)
-        expect(client).to have_received(:add_label).with("sample_repo1", "refactor", "44cec0")
-        expect(client).to have_received(:update_label).with("sample_repo1", "refactor", { color: "44cec0" })
-        expect(client).to have_received(:add_label).with("sample_repo2", "refactor", "44cec0")
-        expect(client).to have_received(:update_label).with("sample_repo2", "refactor", { color: "44cec0" })
-      end
-    end
-  end
-
   describe "#delete_label" do
     it "uses the octokit method" do
       allow(client).to receive(:delete_label!)
