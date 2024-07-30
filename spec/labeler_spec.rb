@@ -83,6 +83,26 @@ RSpec.describe Labeler do
     end
   end
 
+  describe "label_repos" do
+    it "adds labels to all repos in the config file" do
+      labels_hash = {
+        category1: { color: "ff5050", labels: ["bug", "security"] },
+        category5: { color: "44cec0", labels: ["refactor"] }
+      }
+      allow(client).to receive(:add_label)
+      labeler = described_class.new(client: client, labels_hash: labels_hash)
+      dir = File.dirname(__FILE__)
+      config_file = File.join(dir, "config/test.yml")
+      labeler.label_repos(config_file)
+      expect(client).to have_received(:add_label).with("some_org/example_1", "bug", "ff5050")
+      expect(client).to have_received(:add_label).with("some_org/example_1", "security", "ff5050")
+      expect(client).to have_received(:add_label).with("some_org/example_1", "refactor", "44cec0")
+      expect(client).to have_received(:add_label).with("some_org/example_2", "bug", "ff5050")
+      expect(client).to have_received(:add_label).with("some_org/example_2", "security", "ff5050")
+      expect(client).to have_received(:add_label).with("some_org/example_2", "refactor", "44cec0")
+    end
+  end
+
   describe "#apply_labels" do
     it "applies labels" do
       labels_hash = {

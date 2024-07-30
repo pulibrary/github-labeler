@@ -2,6 +2,7 @@ require "json"
 require "open3"
 require "pry"
 require "octokit"
+require "yaml"
 
 class Labeler
   attr_reader :client, :labels_hash
@@ -23,6 +24,7 @@ class Labeler
     client.labels(repo).map { |l| [l[:name], l[:color]] }
   end
 
+  # @param repo String the repository to apply labels to
   def label_repo(repo)
     labels_hash.values.each do |h|
       h[:labels].each do |label|
@@ -30,6 +32,15 @@ class Labeler
       rescue Octokit::UnprocessableEntity => e
         client.update_label(repo, label, { color: h[:color] }) if already_exists_error?(e.message)
       end
+    end
+  end
+
+  def label_repos(config_file)
+    file_string = File.read(config_file)
+    config_hash = YAML.load(file_string)
+    repos_array = config_hash["repos"]
+    repos_array.each do |repo|
+      label_repo(repo)
     end
   end
 

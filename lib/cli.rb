@@ -23,9 +23,11 @@ class LabelerCLI < Thor
     Labeler.new.label_repo(repo)
   end
 
-  desc "apply_labels [org/repository,org/repository] ", "apply all the labels to given repos"
-  def apply_labels(repos)
-    Labeler.new.apply_labels(repos.split(","))
+  desc "label_repos --config=[config/dls.yml]", "apply all the labels to repos found in given config file"
+  option :config, required: true
+  def label_repos
+    config_file = options[:config]
+    Labeler.new.label_repos(config_file)
   end
 
   desc "clear_labels [org/repository/]", "delete all labels from the given repo"
