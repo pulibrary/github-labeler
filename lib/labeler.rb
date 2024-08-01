@@ -2,6 +2,7 @@ require "json"
 require "open3"
 require "pry"
 require "octokit"
+require "yaml"
 
 class Labeler
   attr_reader :client, :labels_hash
@@ -23,20 +24,24 @@ class Labeler
     client.labels(repo).map { |l| [l[:name], l[:color]] }
   end
 
-  # Make an array of repositories
-  # Place array into the apply_labels code
-
-  # Apply the labels
-  # @param repos Array<String> List of repositories to apply labels to, aka ["pulibrary/figgy", "pulibrary/dpul"]
-  def apply_labels(repos)
-    repos.each do |repo|
-      labels_hash.values.each do |h|
-        h[:labels].each do |label|
-          client.add_label(repo, label, h[:color])
-        rescue Octokit::UnprocessableEntity => e
-          client.update_label(repo, label, { color: h[:color] }) if already_exists_error?(e.message)
-        end
+  # @param repo String the repository to apply labels to
+  def label_repo(repo)
+    labels_hash.values.each do |h|
+      h[:labels].each do |label|
+        client.add_label(repo, label, h[:color])
+      rescue Octokit::UnprocessableEntity => e
+        client.update_label(repo, label, { color: h[:color] }) if already_exists_error?(e.message)
       end
+    end
+  end
+
+  # @param config_file String the file name to read configuration from
+  def label_repos(config_file)
+    file_string = File.read(config_file)
+    config_hash = YAML.safe_load(file_string)
+    repos_array = config_hash["repos"]
+    repos_array.each do |repo|
+      label_repo(repo)
     end
   end
 
@@ -54,8 +59,11 @@ class Labeler
   # @param repos Array<String> List of repositories to delete from, aka ["pulibrary/figgy", "pulibrary/dpul"]
   # @param label String The name of the label, aka "on hold"
   # @return bool Whether it was deleted
-  def delete_label(repos, label)
-    repos.map do |repo|
+  def delete_label(config_file, label)
+    file_string = File.read(config_file)
+    config_hash = YAML.safe_load(file_string)
+    repos_array = config_hash["repos"]
+    repos_array.map do |repo|
       client.delete_label!(repo, label)
     end
   end
