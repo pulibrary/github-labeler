@@ -38,7 +38,7 @@ class Labeler
   # @param config_file String the file name to read configuration from
   def label_repos(config_file)
     file_string = File.read(config_file)
-    config_hash = YAML.load(file_string)
+    config_hash = YAML.safe_load(file_string)
     repos_array = config_hash["repos"]
     repos_array.each do |repo|
       label_repo(repo)
@@ -61,7 +61,7 @@ class Labeler
   # @return bool Whether it was deleted
   def delete_label(config_file, label)
     file_string = File.read(config_file)
-    config_hash = YAML.load(file_string)
+    config_hash = YAML.safe_load(file_string)
     repos_array = config_hash["repos"]
     repos_array.map do |repo|
       client.delete_label!(repo, label)
