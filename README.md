@@ -28,25 +28,39 @@ $ lpass login <email@email.com>
 ```
 
 ## Running Commands
+For usage instructions run:
+```
+$ bin/labeler help
+```
+
+### Delete all labels in one repository 
+A newly-created repository has a handful of default labels, which we like to delete before adding our own. 
+
+Example: To delete all labels from the dpul-c repository, do:
+
+```
+$ bin/labeler clear_labels pulibrary/dpul-collections
+```
+
 ### Create labels in one repository
 Example: To apply all the labels from labels.json to the dpul-c repository, do:
 
 ```
-$ bin/labeler apply_labels pulibrary/dpul-collections
+$ bin/labeler label_repo pulibrary/dpul-collections
 ```
 
 ### Create labels in many repositories
 Example: To apply all the labels from labels.json to all DLS repositories, do:
 
 ```
-$ bin/labeler apply_labels pulibrary/figgy,pulibrary/dpul,pulibrary/pulmap,pulibrary/pulfalight,pulibrary/lae-blacklight
+$ bin/labeler label_repos --config=config/dls.yml
 ```
 
 ### Delete a label from many repositories
 Example: To delete the label 'silly-ideas' from all the DLS repositories, do:
 
 ```
-$ bin/labeler delete_label pulibrary/figgy,pulibrary/dpul,pulibrary/pulmap,pulibrary/pulfalight,pulibrary/lae-blacklight silly-ideas
+$ bin/labeler delete_label --config=config/dls.yml "silly-ideas"
 ```
 
 ## Updating the labels configuration
