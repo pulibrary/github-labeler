@@ -80,7 +80,7 @@ class Labeler
   end
 
   def load_labels
-    JSON.parse(File.read("labels.json"), symbolize_names: true)
+    JSON.parse(File.read("config/dls-labels.json"), symbolize_names: true)
   end
 
   def already_exists_error?(message)
