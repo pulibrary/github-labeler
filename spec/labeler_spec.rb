@@ -4,6 +4,7 @@ require "octokit"
 
 RSpec.describe Labeler do
   let(:client) { instance_double("Octokit::Client") }
+  let(:config_file) { File.join(File.dirname(__FILE__), "config/test.json") }
 
   describe "instantiation" do
     it "creates an octokit client" do
@@ -16,8 +17,8 @@ RSpec.describe Labeler do
 
   describe "#categories" do
     it "returns the category names" do
-      labeler = described_class.new(client: client)
-      expect(labeler.categories).to include("board")
+      labeler = described_class.new(client: client, config: config_file)
+      expect(labeler.categories).to include("category1")
     end
   end
 
@@ -47,12 +48,8 @@ RSpec.describe Labeler do
 
   describe "label_repo" do
     it "adds labels to one repo" do
-      labels_hash = {
-        category1: { color: "ff5050", labels: ["bug", "security"] },
-        category5: { color: "44cec0", labels: ["refactor"] }
-      }
       allow(client).to receive(:add_label)
-      labeler = described_class.new(client: client, labels_hash: labels_hash)
+      labeler = described_class.new(client: client, config: config_file)
       repo = "sample_repo1"
       labeler.label_repo(repo)
       expect(client).to have_received(:add_label).with("sample_repo1", "bug", "ff5050")
@@ -62,9 +59,6 @@ RSpec.describe Labeler do
 
     context "when the label already exists" do
       it "updates the color" do
-        labels_hash = {
-          category5: { color: "44cec0", labels: ["refactor"] }
-        }
         response_hash = {
           method: "POST",
           url: "https://api.github.com/repos/hackartisan/dotfiles-local/labels",
@@ -74,7 +68,7 @@ RSpec.describe Labeler do
         allow(client).to receive(:add_label).and_raise(Octokit::UnprocessableEntity.new(response_hash))
         allow(client).to receive(:update_label)
 
-        labeler = described_class.new(client: client, labels_hash: labels_hash)
+        labeler = described_class.new(client: client, config: config_file)
         repo = "sample_repo1"
         labeler.label_repo(repo)
         expect(client).to have_received(:add_label).with("sample_repo1", "refactor", "44cec0")
@@ -85,15 +79,9 @@ RSpec.describe Labeler do
 
   describe "label_repos" do
     it "adds labels to all repos in the config file" do
-      labels_hash = {
-        category1: { color: "ff5050", labels: ["bug", "security"] },
-        category5: { color: "44cec0", labels: ["refactor"] }
-      }
       allow(client).to receive(:add_label)
-      labeler = described_class.new(client: client, labels_hash: labels_hash)
-      dir = File.dirname(__FILE__)
-      config_file = File.join(dir, "config/test.yml")
-      labeler.label_repos(config_file)
+      labeler = described_class.new(client: client, config: config_file)
+      labeler.label_repos
       expect(client).to have_received(:add_label).with("some_org/example_1", "bug", "ff5050")
       expect(client).to have_received(:add_label).with("some_org/example_1", "security", "ff5050")
       expect(client).to have_received(:add_label).with("some_org/example_1", "refactor", "44cec0")
@@ -106,10 +94,8 @@ RSpec.describe Labeler do
   describe "#delete_label" do
     it "uses the octokit method" do
       allow(client).to receive(:delete_label!)
-      labeler = described_class.new(client: client)
-      dir = File.dirname(__FILE__)
-      config_file = File.join(dir, "config/test.yml")
-      labeler.delete_label(config_file, "on hold")
+      labeler = described_class.new(client: client, config: config_file)
+      labeler.delete_label("on hold")
       expect(client).to have_received(:delete_label!).with("some_org/example_1", "on hold")
       expect(client).to have_received(:delete_label!).with("some_org/example_2", "on hold")
     end

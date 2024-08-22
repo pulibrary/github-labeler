@@ -5,17 +5,17 @@ require "octokit"
 require "yaml"
 
 class Labeler
-  attr_reader :client, :labels_hash
+  attr_reader :client, :config
   # @param client Octokit::Client
-  # @param labels_hash Hash see labels.json for expected structure
-  def initialize(client: nil, labels_hash: nil)
+  # @param config String the relative path of the config file
+  def initialize(client: nil, config: nil)
     @client = client || connect_client
-    @labels_hash = labels_hash || load_labels
+    @config = load_config(config)
   end
 
   # lists all the categories in the labels hash
   def categories
-    labels_hash.keys.map(&:to_s)
+    config[:label_categories].keys.map(&:to_s)
   end
 
   # @param repo String The repository, aka "pulibrary/figgy"
@@ -26,7 +26,7 @@ class Labeler
 
   # @param repo String the repository to apply labels to
   def label_repo(repo)
-    labels_hash.values.each do |h|
+    config[:label_categories].values.each do |h|
       h[:labels].each do |label|
         client.add_label(repo, label, h[:color])
       rescue Octokit::UnprocessableEntity => e
@@ -36,10 +36,8 @@ class Labeler
   end
 
   # @param config_file String the file name to read configuration from
-  def label_repos(config_file)
-    file_string = File.read(config_file)
-    config_hash = YAML.safe_load(file_string)
-    repos_array = config_hash["repos"]
+  def label_repos
+    repos_array = config[:repositories]
     repos_array.each do |repo|
       label_repo(repo)
     end
@@ -56,13 +54,10 @@ class Labeler
   end
 
   # Delete the labels from the repo
-  # @param repos Array<String> List of repositories to delete from, aka ["pulibrary/figgy", "pulibrary/dpul"]
   # @param label String The name of the label, aka "on hold"
   # @return bool Whether it was deleted
-  def delete_label(config_file, label)
-    file_string = File.read(config_file)
-    config_hash = YAML.safe_load(file_string)
-    repos_array = config_hash["repos"]
+  def delete_label(label)
+    repos_array = config[:repositories]
     repos_array.map do |repo|
       client.delete_label!(repo, label)
     end
@@ -79,8 +74,10 @@ class Labeler
     out
   end
 
-  def load_labels
-    JSON.parse(File.read("config/dls-labels.json"), symbolize_names: true)
+  def load_config(file_path)
+    return unless file_path
+    file_string = File.read(file_path)
+    JSON.parse(file_string, symbolize_names: true)
   end
 
   def already_exists_error?(message)
