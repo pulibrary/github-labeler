@@ -14,13 +14,19 @@ class LabelerCLI < Thor
   end
 
   desc "categories", "list all the category names"
+  option :config, required: true, banner: "<relative_file_path>"
   def categories
-    puts Labeler.new.categories
+    config_file = options[:config]
+    labeler = Labeler.new(config: config_file)
+    puts labeler.categories
   end
 
   desc "label_repo <org/repository> ", "apply all the labels to given repo"
+  option :config, required: true, banner: "<relative_file_path>"
   def label_repo(repo)
-    Labeler.new.label_repo(repo)
+    config_file = options[:config]
+    labeler = Labeler.new(config: config_file)
+    labeler.label_repo(repo)
   end
 
   desc "label_repos", "apply all the labels to repos found in given config file"
