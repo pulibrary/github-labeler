@@ -33,7 +33,7 @@ class LabelerCLI < Thor
   option :config, required: true, banner: "<relative_file_path>"
   def label_repos
     config_file = options[:config]
-    Labeler.new.label_repos(config_file)
+    Labeler.new(config: config_file).label_repos
   end
 
   desc "clear_labels <org/repository>", "delete all labels from the given repo"

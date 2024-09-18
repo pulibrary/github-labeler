@@ -1,4 +1,15 @@
 {
+  "repositories": [
+    "pulibrary/dls-github-labeler",
+    "pulibrary/abid",
+    "pulibrary/dpul",
+    "pulibrary/dpul-collections",
+    "pulibrary/figgy",
+    "pulibrary/imagecat-rails",
+    "pulibrary/lae-blacklight",
+    "pulibrary/pulmap",
+    "pulibrary/pulfalight"
+  ],
   "label_categories": {
     "high priority": {
       "color-name": "red",
