@@ -2,7 +2,6 @@ require "json"
 require "open3"
 require "pry"
 require "octokit"
-require "yaml"
 
 class Labeler
   attr_reader :client, :config
