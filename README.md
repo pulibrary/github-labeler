@@ -43,24 +43,24 @@ $ bin/labeler clear_labels pulibrary/dpul-collections
 ```
 
 ### Create labels in one repository
-Example: To apply all the labels from labels.json to the dpul-c repository, do:
+Example: To apply all the labels from config/dls-labels.json to the dpul-c repository, do:
 
 ```
-$ bin/labeler label_repo pulibrary/dpul-collections
+$ bin/labeler label_repo pulibrary/dpul-collections --config=config/dls-labels.json
 ```
 
 ### Create labels in many repositories
-Example: To apply all the labels from labels.json to all DLS repositories, do:
+Example: To apply all the labels from config/dls-labels.json to all DLS repositories, do:
 
 ```
-$ bin/labeler label_repos --config=config/dls.yml
+$ bin/labeler label_repos --config=config/dls-labels.json
 ```
 
 ### Delete a label from many repositories
 Example: To delete the label 'silly-ideas' from all the DLS repositories, do:
 
 ```
-$ bin/labeler delete_label --config=config/dls.yml "silly-ideas"
+$ bin/labeler delete_label --config=config/dls-labels.json "silly-ideas"
 ```
 
 ## Updating the labels configuration
@@ -69,7 +69,7 @@ Labels have a color and a name. In this repository, labels are defined as
 belonging to some category. Labels in the same category have the same color.
 This helps us quickly recognize that type of label we're looking at even before
 we read its name. Categories, their labels, and their colors are defined and
-maintained in [labels.json](labels.json)
+maintained in [config/dls-labels.json](config/dls-labels.json)
 
 Labels should be lower case and use dashes, not underscores.
 

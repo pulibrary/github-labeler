@@ -1,0 +1,23 @@
+{
+  "repositories": [
+    "some_org/example_1",
+    "some_org/example_2"
+  ],
+  "label_categories": {
+    "category1": {
+      "color-name": "red",
+      "color": "ff5050",
+      "labels": [
+        "bug",
+        "security"
+      ]
+    },
+    "category5": {
+      "color-name": "magenta",
+      "color": "44cec0",
+      "labels": [
+        "refactor"
+      ]
+    }
+  }
+}
