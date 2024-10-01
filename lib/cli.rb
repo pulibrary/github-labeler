@@ -21,19 +21,19 @@ class LabelerCLI < Thor
     puts labeler.categories
   end
 
-  desc "label_repo <org/repository> ", "apply all the labels to given repo"
+  desc "apply_labels <org/repository> ", "apply all the labels to given repo"
   option :config, required: true, banner: "<relative_file_path>"
-  def label_repo(repo)
+  def apply_labels(repo)
     config_file = options[:config]
     labeler = Labeler.new(config: config_file)
-    labeler.label_repo(repo)
+    labeler.apply_labels(repo)
   end
 
-  desc "label_repos", "apply all the labels to repos found in given config file"
+  desc "apply_labels_to_all", "apply all the labels to repos found in given config file"
   option :config, required: true, banner: "<relative_file_path>"
-  def label_repos
+  def apply_labels_to_all
     config_file = options[:config]
-    Labeler.new(config: config_file).label_repos
+    Labeler.new(config: config_file).apply_labels_to_all
   end
 
   desc "clear_labels <org/repository>", "delete all labels from the given repo"

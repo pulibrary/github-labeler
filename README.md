@@ -46,14 +46,14 @@ $ bin/labeler clear_labels pulibrary/dpul-collections
 Example: To apply all the labels from config/dls-labels.json to the dpul-c repository, do:
 
 ```
-$ bin/labeler label_repo pulibrary/dpul-collections --config=config/dls-labels.json
+$ bin/labeler apply_labels pulibrary/dpul-collections --config=config/dls-labels.json
 ```
 
 ### Create labels in many repositories
 Example: To apply all the labels from config/dls-labels.json to all DLS repositories, do:
 
 ```
-$ bin/labeler label_repos --config=config/dls-labels.json
+$ bin/labeler apply_labels_to_all --config=config/dls-labels.json
 ```
 
 ### Delete a label from many repositories
