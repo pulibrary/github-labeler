@@ -24,7 +24,7 @@ class Labeler
   end
 
   # @param repo String the repository to apply labels to
-  def label_repo(repo)
+  def apply_labels(repo)
     config[:label_categories].values.each do |h|
       h[:labels].each do |label|
         client.add_label(repo, label, h[:color])
@@ -35,10 +35,10 @@ class Labeler
   end
 
   # @param config_file String the file name to read configuration from
-  def label_repos
+  def apply_labels_to_all
     repos_array = config[:repositories]
     repos_array.each do |repo|
-      label_repo(repo)
+      apply_labels(repo)
     end
   end
 
