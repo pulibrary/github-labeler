@@ -1,10 +1,16 @@
-# DLS GitHub Labeler
+# pulibrary GitHub Labeler
 
-This project contains a script that can delete and create labels for github
-repositories. We run the label creation command on any new DLS github
-repository. This gives us consistency between our project repositories.
+This project contains a script that can delete and create labels for github repositories. This gives us consistency between our project repositories.
+
+## Example usage
+
+On the DLS team, after creating a new repository, we run `clear_labels`
+and then `apply_labels` to initialize the repository with our standard
+set of labels. 
 
 ## Initial Setup
+
+Ensure your team has a config file in the config directory. config/dls-labels.json can be used as a reference.
 
 Install external dependencies:
 ```
@@ -63,13 +69,13 @@ Example: To delete the label 'silly-ideas' from all the DLS repositories, do:
 $ bin/labeler delete_label --config=config/dls-labels.json "silly-ideas"
 ```
 
-## Updating the labels configuration
+## About the labels configuration
 
 Labels have a color and a name. In this repository, labels are defined as
 belonging to some category. Labels in the same category have the same color.
-This helps us quickly recognize that type of label we're looking at even before
+This helps us quickly recognize the type of label we're looking at even before
 we read its name. Categories, their labels, and their colors are defined and
-maintained in [config/dls-labels.json](config/dls-labels.json)
+maintained in json config files in the config directory.
 
 Labels should be lower case and use dashes, not underscores.
 
