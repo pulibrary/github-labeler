@@ -1,0 +1,105 @@
+{
+    "repositories":[
+       "pulibrary/rdss-catchall",
+       "pulibrary/rdss-handbook",
+       "pulibrary/dataspace_embargo_lifter",
+       "pulibrary/oawaiver",
+       "pulibrary/orcid_princeton",
+       "pulibrary/pdc_describe",
+       "pulibrary/pdc_discovery", 
+       "pulibrary/tigerdata-app"
+    ],
+    "label_categories":{
+       "high priority":{
+          "color-name":"red",
+          "color":"ff5050",
+          "labels":[
+             "bug",
+             "post-incident",
+             "security",
+             "unplanned work"
+          ]
+       },
+       "blocked":{
+          "color-name":"magenta",
+          "color":"cc317c",
+          "labels":[
+             "question",
+             "blocked",
+             "under-po-revew"
+          ]
+       },
+       "shared-goal":{
+          "color-name":"orange",
+          "color":"EF5C19",
+          "labels":[
+             "shared-goal",
+             "accessibility"
+          ]
+       },
+       "source":{
+          "color-name":"dark yellow",
+          "color":"fbca04",
+          "labels":[
+             "user-request",
+             "honeybadger"
+          ]
+       },
+       "scope":{
+          "color-name":"bright aqua",
+          "color":"41d6c3",
+          "labels":[
+             "enhancement",
+             "epic"
+          ]
+       },
+       "size":{
+          "color-name":"royal blue",
+          "color":"5319e7",
+          "labels":[
+             "spike",
+             "learning-friendly"
+          ]
+       },
+       "status":{
+          "color-name":"gray",
+          "color":"e9e9e9",
+          "labels":[
+             "wontfix",
+             "duplicate"
+          ]
+       },
+       "mvp":{
+          "color-name":"dark green",
+          "color":"013220",
+          "labels":[
+             "MVP",
+             "post-MVP",
+             "public-launch"
+          ]
+       },
+       "task":{
+          "color-name":"dusty blue",
+          "color":"bfdadc",
+          "labels":[
+             "cleanup",
+             "dependencies",
+             "technical-debt"
+          ]
+       },
+       "board":{
+          "color-name":"bright yellow",
+          "color":"fffe99",
+          "labels":[
+             "operations"
+          ]
+       },
+       "pending":{
+          "color-name":"pale green",
+          "color":"c2e0c6",
+          "labels":[
+             "pending"
+          ]
+       }
+    }
+ }
