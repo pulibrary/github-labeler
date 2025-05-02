@@ -10,7 +10,7 @@ set of labels.
 
 ## Initial Setup
 
-Ensure your team has a config file in the config directory. config/dls-labels.json can be used as a reference.
+Ensure your team has a config file in the config directory. config/dls-labels.json can be used as a reference. A label can be just the label name as a string, or a hash with `name` and `description` keys.
 
 Install external dependencies:
 ```

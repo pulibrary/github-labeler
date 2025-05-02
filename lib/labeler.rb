@@ -25,12 +25,28 @@ class Labeler
 
   # @param repo String the repository to apply labels to
   def apply_labels(repo)
-    config[:label_categories].values.each do |h|
-      h[:labels].each do |label|
-        client.add_label(repo, label, h[:color])
+    config[:label_categories].values.each do |category|
+      category[:labels].each do |label|
+        if label.is_a?(String)
+          client.add_label(repo, label, category[:color])
+        elsif label.is_a?(Hash)
+          client.add_label(repo, label[:name], category[:color], label.reject { |k| k == :name })
+        end
       rescue Octokit::UnprocessableEntity => e
-        client.update_label(repo, label, { color: h[:color] }) if already_exists_error?(e.message)
+        update_label(repo, label, category) if already_exists_error?(e.message)
       end
+    end
+  end
+
+  # ensure we pass the description if it's part of the label definition
+  def update_label(repo, label, category)
+    if label.is_a?(String)
+      client.update_label(repo, label, { color: category[:color] })
+    elsif label.is_a?(Hash)
+      client.update_label(
+        repo, label[:name],
+        label.reject { |k| k == :name }.merge(color: category[:color])
+      )
     end
   end
 
