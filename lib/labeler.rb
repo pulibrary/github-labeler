@@ -33,7 +33,8 @@ class Labeler
           client.add_label(repo, label[:name], category[:color], label.reject { |k| k == :name })
         end
       rescue Octokit::UnprocessableEntity => e
-        update_label(repo, label, category) if already_exists_error?(e.message)
+        raise e unless already_exists_error?(e.message)
+        update_label(repo, label, category)
       end
     end
   end
