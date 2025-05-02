@@ -8,7 +8,10 @@
       "color-name": "red",
       "color": "ff5050",
       "labels": [
-        "bug",
+        {
+          "name": "bug",
+          "description": "for bugs"
+        },
         "security"
       ]
     },

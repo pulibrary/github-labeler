@@ -52,7 +52,7 @@ RSpec.describe Labeler do
       labeler = described_class.new(client: client, config: config_file)
       repo = "sample_repo1"
       labeler.apply_labels(repo)
-      expect(client).to have_received(:add_label).with("sample_repo1", "bug", "ff5050")
+      expect(client).to have_received(:add_label).with("sample_repo1", "bug", "ff5050", { description: "for bugs" })
       expect(client).to have_received(:add_label).with("sample_repo1", "security", "ff5050")
       expect(client).to have_received(:add_label).with("sample_repo1", "refactor", "44cec0")
     end
@@ -73,6 +73,8 @@ RSpec.describe Labeler do
         labeler.apply_labels(repo)
         expect(client).to have_received(:add_label).with("sample_repo1", "refactor", "44cec0")
         expect(client).to have_received(:update_label).with("sample_repo1", "refactor", { color: "44cec0" })
+        expect(client).to have_received(:add_label).with("sample_repo1", "bug", "ff5050", { description: "for bugs" })
+        expect(client).to have_received(:update_label).with("sample_repo1", "bug", { color: "ff5050", description: "for bugs" })
       end
     end
   end
@@ -82,10 +84,10 @@ RSpec.describe Labeler do
       allow(client).to receive(:add_label)
       labeler = described_class.new(client: client, config: config_file)
       labeler.apply_labels_to_all
-      expect(client).to have_received(:add_label).with("some_org/example_1", "bug", "ff5050")
+      expect(client).to have_received(:add_label).with("some_org/example_1", "bug", "ff5050", { description: "for bugs" })
       expect(client).to have_received(:add_label).with("some_org/example_1", "security", "ff5050")
       expect(client).to have_received(:add_label).with("some_org/example_1", "refactor", "44cec0")
-      expect(client).to have_received(:add_label).with("some_org/example_2", "bug", "ff5050")
+      expect(client).to have_received(:add_label).with("some_org/example_2", "bug", "ff5050", { description: "for bugs" })
       expect(client).to have_received(:add_label).with("some_org/example_2", "security", "ff5050")
       expect(client).to have_received(:add_label).with("some_org/example_2", "refactor", "44cec0")
     end

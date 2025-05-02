@@ -47,7 +47,10 @@
       "labels": [
         "feature",
         "enhancement",
-        "bug"
+        "bug",
+        { "name": "iteration",
+          "description": "continuing work, may be lightly specified and subject to team discussion before merge"
+        }
       ]
     },
     "size": {
