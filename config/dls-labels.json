@@ -60,7 +60,10 @@
         "spike",
         "small",
         "epic",
-        "learning-friendly"
+        "learning-friendly",
+        { "name": "pair",
+          "description": "this might be a good or fun ticket to pair or ensemble on"
+        }
       ]
     },
     "status": {
